@@ -132,3 +132,14 @@ HTTP no recuerda nada entre peticiones. Django usa sesiones para solucionar esto
 | GET | `/clinica/api/perfil/` | Devuelve datos del usuario autenticado | Header: `Authorization: Token <token>` | `id`, `username`, `email` | 200 / 401 |
 | GET | `/clinica/api/estadisticas/` | Totales del sistema (solo administradores) | Header: `Authorization: Token <token>` | Totales de propietarios, mascotas, activas y consultas | 200 / 401 / 403 |
 | GET | `/clinica/api/sesion/` | Contador de accesos via sesion | Ninguno | `{ "contador": n }` | 200 |
+
+
+## Reflexión final
+
+ 1 - Postman manda un POST a `/clinica/api/consultas/` con los datos en JSON 
+ 2 - La URL redirige la petición a la View 
+ 3 - La View le pasa los datos al Serializer 
+ 4 - El Serializer valida que el costo no sea negativo y el motivo no esté vacío 
+ 5 - Si algo está mal, devuelve 400 con el error. Si todo está bien, sigue 
+ 6 - El Serializer usa el Model para guardar el registro con el ORM 
+ 7 - Django devuelve la Response con los datos guardados y el código 201 
