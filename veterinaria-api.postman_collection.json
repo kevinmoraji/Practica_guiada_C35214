@@ -1,0 +1,473 @@
+{
+  "info": {
+    "_postman_id": "51981a0f-39f9-4fb2-ae6a-0897303699af",
+    "name": "Sistema Veterinaria API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "45450325",
+    "_collection_link": "https://go.postman.co/collection/45450325-51981a0f-39f9-4fb2-ae6a-0897303699af?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "crear mascota valido",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"nombre\": \"Milo\",\r\n    \"especie\": \"Perro\",\r\n    \"raza\": \"Beagle\",\r\n    \"peso\": 12.5,\r\n    \"activo\": true,\r\n    \"propietario\": 1\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8000/clinica/api/mascotas/",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "clinica",
+            "api",
+            "mascotas",
+            ""
+          ]
+        },
+        "description": "Crear mascota valida"
+      },
+      "response": []
+    },
+    {
+      "name": "mascota peso invalido",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"nombre\": \"Prueba\",\r\n    \"especie\": \"Gato\",\r\n    \"peso\": 0,\r\n    \"propietario\": 1\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8000/clinica/api/mascotas/",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "clinica",
+            "api",
+            "mascotas",
+            ""
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "mascota inecistente",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://127.0.0.1:8000/clinica/api/mascotas/9999/",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "clinica",
+            "api",
+            "mascotas",
+            "9999",
+            ""
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "actualizar mascota",
+      "request": {
+        "method": "PATCH",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"peso\": 28.0\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8000/clinica/api/mascotas/1/",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "clinica",
+            "api",
+            "mascotas",
+            "1",
+            ""
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "crear consulta valida",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"mascota\": 1,\r\n    \"motivo\": \"Chequeo general\",\r\n    \"diagnostico\": \"Sano\",\r\n    \"tratamiento\": \"Ninguno\",\r\n    \"costo\": 15000\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8000/clinica/api/consultas/",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "clinica",
+            "api",
+            "consultas",
+            ""
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "consulta de costo invalido por ser negativo",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"mascota\": 1,\r\n    \"motivo\": \"Chequeo\",\r\n    \"costo\": -100\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8000/clinica/api/consultas/",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "clinica",
+            "api",
+            "consultas",
+            ""
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "listar mascotas paginado",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://127.0.0.1:8000/clinica/api/mascotas/",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "clinica",
+            "api",
+            "mascotas",
+            ""
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "filtrar mascotas por especie",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://127.0.0.1:8000/clinica/api/mascotas/?especie=Perro",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "clinica",
+            "api",
+            "mascotas",
+            ""
+          ],
+          "query": [
+            {
+              "key": "especie",
+              "value": "Perro"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "obtener token de ususario1",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"username\": \"usuario1\",\r\n    \"password\": \"Vetclinica2026\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8000/clinica/api/token/",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "clinica",
+            "api",
+            "token",
+            ""
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "perfil sin token",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://127.0.0.1:8000/clinica/api/perfil/",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "clinica",
+            "api",
+            "perfil",
+            ""
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "perfil con token",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Token c351f0ced7e076a6dd901dccc2e57854daedeb65"
+          }
+        ],
+        "url": {
+          "raw": "http://127.0.0.1:8000/clinica/api/perfil/",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "clinica",
+            "api",
+            "perfil",
+            ""
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "estadisticas de usuario regular",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Token c351f0ced7e076a6dd901dccc2e57854daedeb65"
+          }
+        ],
+        "url": {
+          "raw": "http://127.0.0.1:8000/clinica/api/estadisticas/",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "clinica",
+            "api",
+            "estadisticas",
+            ""
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "token admin",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"username\": \"adminvet\",\r\n    \"password\": \"AdminVet2026\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8000/clinica/api/token/",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "clinica",
+            "api",
+            "token",
+            ""
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "estadisticas admin",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Token c22d95ff5e5bed58b75d791849eca6b7e770ce17"
+          }
+        ],
+        "url": {
+          "raw": "http://127.0.0.1:8000/clinica/api/estadisticas/",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "clinica",
+            "api",
+            "estadisticas",
+            ""
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "contador de sesion",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://127.0.0.1:8000/clinica/api/sesion/",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "clinica",
+            "api",
+            "sesion",
+            ""
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
