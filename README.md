@@ -10,6 +10,10 @@
 8. La API queda en `http://127.0.0.1:8000/clinica/`
 
 
+## Usuarios de prueba
+
+ `usuario1`  `Vetclinica2026`  Usuario regular 
+  `adminvet`  `AdminVet2026`  Administrador 
 
 ##Documentacion de las consultas
 
