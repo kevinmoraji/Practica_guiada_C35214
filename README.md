@@ -1,3 +1,16 @@
+## Instalación y ejecución
+
+1. Clonar el repositorio y entrar a la carpeta del proyecto
+2. Crear el entorno virtual: `python -m venv .venv`
+3. Activar el entorno virtual: `.venv\Scripts\activate` (Windows)
+4. Instalar dependencias: `pip install "Django>=5.2,<5.3" djangorestframework`
+5. Aplicar migraciones: `python manage.py migrate`
+6. Crear un superusuario (que es opcional, para el admin): `python manage.py createsuperuser`
+7. Levantar el servidor: `python manage.py runserver`
+8. La API queda en `http://127.0.0.1:8000/clinica/`
+
+
+
 ##Documentacion de las consultas
 
 ## Bloque 3 – ORM aplicado al dominio veterinario
