@@ -12,8 +12,8 @@
 
 ## Usuarios de prueba
 
- `usuario1`  `Vetclinica2026`  Usuario regular 
-  `adminvet`  `AdminVet2026`  Administrador 
+- usuario1 / Vetclinica2026 - usuario regular
+- adminvet / AdminVet2026 - administrador
 
 ##Documentacion de las consultas
 
@@ -121,42 +121,41 @@ de comparación sobre un campo del modelo. En `peso__gt=10`, peso es el campo y 
 
 **Explique la diferencia entre autenticación y autorización utilizando los dos endpoints anteriores**
 
-La autenticación verifica quién es el usuario que hace la petición mediante un token válido enviado en el header Authorization. Si no hay token o es inválido, la petición es rechazada antes de saber siquiera qué permisos tiene esa persona ,cualquier usuario autenticado, sin importar su rol, puede acceder. La autorización determina qué puede hacer ese usuario ya autenticado.
+La autenticación verifica quién es el usuario que hace la petición mediante un token válido enviado en el header Authorization. Si no hay token o es inválido, la petición es rechazada antes de saber siquiera qué permisos tiene esa persona ,cualquier usuario autenticado sin importar su rol puede acceder. La autorización determina que puede hacer ese usuario ya autenticado
 
 
 **Explique por qué una sesión permite mantener estado aunque HTTP sea un protocolo sin estado.**
 
-HTTP no recuerda nada entre peticiones. Django usa sesiones para solucionar esto: guarda datos en el servidor y le da al cliente una cookie con un id. En cada petición, el cliente manda esa cookie y el servidor busca los datos guardados con ese id. Así se simula memoria aunque HTTP no la tenga.
+HTTP no recuerda nada entre peticiones Django usa sesiones para solucionar esto guarda datos en el servidor y le da al cliente una cookie con un id. En cada petición el cliente manda esa cookie y el servidor busca los datos guardados con ese id, entonces se simula memoria aunque HTTP no la tenga
 
 
 
 
 ## Documentacion de la API
 
-| Método | URL | Descripción | Parámetros/Body | Respuesta | Códigos 
-| GET | `/clinica/` | Verifica que la API está activa | Ninguno | Texto plano | 200 |
-| GET | `/clinica/api/mascotas/` | Lista mascotas (paginado, 5 por página) | Query params opcionales: `page`, `especie`, `activas`, `propietario` | Objeto con `count`, `next`, `previous`, `results` | 200 |
-| POST | `/clinica/api/mascotas/` | Registra una nueva mascota | Body JSON: `nombre`, `especie`, `raza`, `fecha_nacimiento`, `peso`, `activo`, `propietario` | Objeto de la mascota creada | 201 / 400 |
-| GET | `/clinica/api/mascotas/<id>/` | Detalle de una mascota | Ninguno | Objeto de la mascota | 200 / 404 |
-| PUT | `/clinica/api/mascotas/<id>/` | Actualiza una mascota (todos los campos) | Body JSON completo | Objeto actualizado | 200 / 400 / 404 |
-| PATCH | `/clinica/api/mascotas/<id>/` | Actualiza parcialmente una mascota | Body JSON con los campos a cambiar | Objeto actualizado | 200 / 400 / 404 |
-| DELETE | `/clinica/api/mascotas/<id>/` | Elimina una mascota | Ninguno | Sin contenido | 204 / 404 |
-| GET | `/clinica/api/propietarios/` | Lista propietarios | Ninguno | Lista de propietarios | 200 |
-| POST | `/clinica/api/propietarios/` | Registra un propietario | Body JSON: `identificacion`, `nombre`, `telefono`, `email` | Objeto creado | 201 / 400 |
-| GET | `/clinica/api/consultas/` | Lista consultas veterinarias | Ninguno | Lista de consultas | 200 |
-| POST | `/clinica/api/consultas/` | Registra una consulta | Body JSON: `mascota`, `motivo`, `diagnostico`, `tratamiento`, `costo` | Objeto creado | 201 / 400 |
-| POST | `/clinica/api/token/` | Obtiene un token de autenticacion | Body JSON: `username`, `password` | `{ "token": "..." }` | 200 / 400 |
-| GET | `/clinica/api/perfil/` | Devuelve datos del usuario autenticado | Header: `Authorization: Token <token>` | `id`, `username`, `email` | 200 / 401 |
-| GET | `/clinica/api/estadisticas/` | Totales del sistema (solo administradores) | Header: `Authorization: Token <token>` | Totales de propietarios, mascotas, activas y consultas | 200 / 401 / 403 |
-| GET | `/clinica/api/sesion/` | Contador de accesos via sesion | Ninguno | `{ "contador": n }` | 200 |
+- GET `/clinica/` - verifica que la API está activa. Respuesta: texto plano. Código: 200
+- GET `/clinica/api/mascotas/` - lista mascotas, paginado de a 5. Query params opcionales: page, especie, activas, propietario. Código: 200
+- POST `/clinica/api/mascotas/` - registra una mascota. Body: nombre, especie, raza, fecha_nacimiento, peso, activo, propietario. Códigos: 201 / 400
+- GET `/clinica/api/mascotas/<id>/` - detalle de una mascota. Códigos: 200 / 404
+- PUT `/clinica/api/mascotas/<id>/` - actualiza una mascota completa. Códigos: 200 / 400 / 404
+- PATCH `/clinica/api/mascotas/<id>/` - actualiza parcialmente una mascota. Códigos: 200 / 400 / 404
+- DELETE `/clinica/api/mascotas/<id>/` - elimina una mascota. Códigos: 204 / 404
+- GET `/clinica/api/propietarios/` - lista propietarios. Código: 200
+- POST `/clinica/api/propietarios/` - registra un propietario. Body: identificacion, nombre, telefono, email. Códigos: 201 / 400
+- GET `/clinica/api/consultas/` - lista consultas. Código: 200
+- POST `/clinica/api/consultas/` - registra una consulta. Body: mascota, motivo, diagnostico, tratamiento, costo. Códigos: 201 / 400
+- POST `/clinica/api/token/` - obtiene un token de autenticacion. Body: username, password. Códigos: 200 / 400
+- GET `/clinica/api/perfil/` - devuelve datos del usuario autenticado. Requiere header Authorization: Token. Códigos: 200 / 401
+- GET `/clinica/api/estadisticas/` - totales del sistema, solo administradores. Requiere header Authorization: Token. Códigos: 200 / 401 / 403
+- GET `/clinica/api/sesion/` - contador de accesos via sesion. Código: 200
 
 
 ## Reflexión final
 
- 1 - Postman manda un POST a `/clinica/api/consultas/` con los datos en JSON 
- 2 - La URL redirige la petición a la View 
- 3 - La View le pasa los datos al Serializer 
- 4 - El Serializer valida que el costo no sea negativo y el motivo no esté vacío 
- 5 - Si algo está mal, devuelve 400 con el error. Si todo está bien, sigue 
- 6 - El Serializer usa el Model para guardar el registro con el ORM 
- 7 - Django devuelve la Response con los datos guardados y el código 201 
+1. Postman manda un POST a `/clinica/api/consultas/` con los datos en JSON
+2. La URL redirige la petición a la View
+3. La View le pasa los datos al Serializer
+4. El Serializer valida que el costo no sea negativo y el motivo no esté vacío
+5. Si algo está mal, devuelve 400 con el error. Si todo está bien, sigue
+6. El Serializer usa el Model para guardar el registro con el ORM
+7. Django devuelve la Response con los datos guardados y el código 201
